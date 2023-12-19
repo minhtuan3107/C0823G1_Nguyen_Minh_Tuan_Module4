@@ -19,8 +19,7 @@ public class Dictionary {
         map.put("cat", "Con Mèo");
         map.put("pig", "Con Heo");
         map.put("cow", "Con Bò");
-        map.put("bird","Con chim");
-
+        map.put("bird", "Con chim");
     }
 
     @GetMapping("")
@@ -35,7 +34,7 @@ public class Dictionary {
             if (mapSearch.getKey().toLowerCase().contains(name)) {
                 result = "Kết quả của từ khóa: " + mapSearch.getKey() + " là: " + mapSearch.getValue();
                 break;
-            }
+            }   
         }
         if (result == null) {
             result = "Không tìm thấy";
