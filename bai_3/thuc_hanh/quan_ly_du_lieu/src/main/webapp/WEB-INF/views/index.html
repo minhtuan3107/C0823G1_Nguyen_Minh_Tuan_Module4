@@ -1,0 +1,157 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<!DOCTYPE html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Quản lý dữ liệu khách hàng</h1>
+
+<table class="table table-cell">
+    <tr>
+        <td>STT</td>
+        <td>
+            Tên
+        </td>
+        <td>Địa chỉ</td>
+        <td>Hành động</td>
+    </tr>
+    <tr th:each="customer, loop : ${list}">
+        <td th:text="${loop.count}"></td>
+        <td th:text="${customer.getName()}"></td>
+        <td th:text="${customer.getAddress()}"></td>
+        <td><a th:href="@{/edit/{id}(id=${customer.getId()})}">Sửa</a>
+            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
+                    data-bs-target="#deleteModal"
+                    th:attr="data-customer-id=${customer.getId()} , data-customer-name=${customer.getName()} "
+                    onclick="deleteCustomer(this)">
+                Xóa
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
+                    data-bs-target="#detailModal"
+                    th:attr="data-customer-id=${customer.getId()} , data-customer-name=${customer.getName()} , data-customer-email=${customer.getEmail()}, data-customer-address=${customer.getAddress()} "
+                    onclick="detailCustomer(this)">
+                Detail
+            </button>
+        </td>
+    </tr>
+</table>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Thêm
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form th:action="@{/add}" th:object="${customer}">
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <input type="hidden" th:field="*{id}">
+                            <td>Tên</td>
+                            <td><input type="text" th:field="*{name}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><input type="text" th:field="*{email}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Địa chỉ</td>
+                            <td><input type="text" th:field="*{address}">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/delete" method="post">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete customer:</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure want to delete <span id="nameEdit"></span>?
+                    <input type="hidden" id="idEdit" name="idEdit" value="idEdit">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="detailModalLabel">Detail customer:</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Details ID : <span id="idDetail"></span>?
+                <table>
+                    <tr>
+                        <td>Tên</td>
+                        <td>Email</td>
+                        <td>Địa chỉ</td>
+                    </tr>
+                    <tr>
+                        <td><span id="nameDetail"></span></td>
+                        <td><span id="emailDetail"></span></td>
+                        <td><span id="addressDetail"></span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    function deleteCustomer(button) {
+        var id = button.getAttribute('data-customer-id');
+        var name = button.getAttribute('data-customer-name');
+        document.getElementById("idEdit").value = id;
+        document.getElementById("nameEdit").innerText = name;
+    }
+
+    function detailCustomer(button) {
+        var idDetail = button.getAttribute('data-customer-id');
+        var nameDetail = button.getAttribute('data-customer-name');
+        var emailDetail = button.getAttribute('data-customer-email')
+        var addressDetail = button.getAttribute('data-customer-address')
+        console.log(addressDetail);
+        console.log(nameDetail);
+        document.getElementById("idDetail").innerText = idDetail;
+        document.getElementById("nameDetail").innerText = nameDetail;
+        document.getElementById("emailDetail").innerText = emailDetail;
+        document.getElementById("addressDetail").innerHTML  = addressDetail;
+    }
+</script>
+</html>

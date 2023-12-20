@@ -2,6 +2,7 @@ package com.example;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -29,7 +30,7 @@ public class Dictionary {
 
     @GetMapping("/dictionary")
     public String translate(@RequestParam String name, Model model) {
-        String result = map.get(name);
+        String result = map.get(name.toLowerCase());
         if (result == null) {
             result = "Không tìm thấy";
         }
