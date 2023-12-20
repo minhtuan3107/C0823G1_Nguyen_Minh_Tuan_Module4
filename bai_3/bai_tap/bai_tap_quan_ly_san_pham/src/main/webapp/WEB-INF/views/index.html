@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1 style="text-align: center">Quản lý sản phẩm</h1>
-<a class="button" style="text-decoration: none" th:href="@{/add}">Thêm mới sản phẩm</a>
+<a class="btn btn-primary" style="text-decoration: none" th:href="@{/add}">Thêm mới sản phẩm</a>
 <form th:action="@{search}" class="d-flex" role="search">
     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="name">
     <button class="btn btn-outline-success" type="submit">Search</button>
@@ -28,9 +28,9 @@
         <td th:text="${product.getPrice()}"></td>
         <td th:text="${product.getDes()}"></td>
         <td th:text="${product.getProducer()}"></td>
-        <td><a th:href="@{/edit/{id}(id=${product.getId()})}">Sửa</a>
-            <a th:href="@{/delete/{id}(id=${product.getId()})}">Xóa</a>
-            <a th:href="@{/info/{id}(id=${product.getId()})}">View</a></td>
+        <td><a class="btn btn-primary" th:href="@{/edit/{id}(id=${product.getId()})}">Sửa</a>
+            <a class="btn btn-primary" th:href="@{/delete/{id}(id=${product.getId()})}">Xóa</a>
+            <a class="btn btn-primary" th:href="@{/info/{id}(id=${product.getId()})}">View</a></td>
     </tr>
 </table>
 </body>
