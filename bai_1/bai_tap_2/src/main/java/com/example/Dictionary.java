@@ -29,13 +29,7 @@ public class Dictionary {
 
     @GetMapping("/dictionary")
     public String translate(@RequestParam String name, Model model) {
-        String result = null;
-        for (Map.Entry<String, String> mapSearch : map.entrySet()) {
-            if (mapSearch.getKey().toLowerCase().contains(name)) {
-                result = "Kết quả của từ khóa: " + mapSearch.getKey() + " là: " + mapSearch.getValue();
-                break;
-            }   
-        }
+        String result = map.get(name);
         if (result == null) {
             result = "Không tìm thấy";
         }
