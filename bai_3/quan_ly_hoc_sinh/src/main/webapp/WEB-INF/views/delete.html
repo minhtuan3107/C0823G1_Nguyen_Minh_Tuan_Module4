@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <title>Title</title>
+</head>
+<body>
+<h1 style="text-align: center">Xóa học sinh</h1>
+<form th:action="@{/deleteStudent}" method="post" th:object="${student}">
+    <div class="mb-3">
+        <input type="hidden" th:field="*{id}">
+        <p>Học sinh có ID là : </p><a th:text="*{id}"></a>
+        <p>Học sinh có tên là : </p><a th:text="*{name}"></a>
+        <p>Học sinh có giới tính là : </p><a th:text="*{gender}"></a>
+        <p>Học sinh có tuổi là : </p><a th:text="*{age}"></a>
+        <p>Học sinh có địa chỉ là : </p><a th:text="*{address}"></a>
+    </div>
+    <p>Bạn có chắc muốn xóa không ?</p>
+    <a th:href="@{/}" class="btn btn-primary" tabindex="-1"
+       role="button"
+       aria-disabled="true">Không
+    </a>
+    <button type="submit" class="btn btn-primary">Xác nhận</button>
+</form>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+
+</html>
