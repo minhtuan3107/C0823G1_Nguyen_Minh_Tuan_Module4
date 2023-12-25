@@ -59,7 +59,6 @@ public class StudentController {
         service.edit(student);
         return "redirect:/index";
     }
-
     @GetMapping("/delete/{id}")
     private String formDelete(Model model, @PathVariable int id) {
         for (Student student : service.getList()) {
