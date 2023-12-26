@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+</head>
+<body>
+
+<h1 style="text-align: center">Quản lý blog <a class="btn btn-primary" style="text-decoration: none" th:href="@{/add}">Thêm
+    mới blog</a></h1>
+<a class="btn btn-primary" style="text-decoration: none" th:href="@{category}">Quản lý danh mục</a>
+<nav class="navbar bg-light">
+    <form class="d-flex" role="search" th:action="@{/}">
+        <input class="form-control me-2" type="search" name="searchName" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+</nav>
+<div th:if="${blog.size()} == 0">
+    <p>Khong co blog nao</p>
+</div>
+<div class="row">
+    <div th:each="item, iterStat : ${blogPage}" class="col-md-3">
+        <div class="card" style="width: 18rem;">
+            <img th:src="${item.getImgs()}" class="card-img-top" alt="..." src="">
+            <div class="card-body">
+                <h5 class="card-title"><span th:text="${item.getName()}"></span></h5>
+                <p class="card-text"><span th:text="${item.getTexts()}"></span></p>
+                <a class="btn btn-primary" style="text-decoration: none" th:href="@{/info/{id}(id=${item.getId()})}">Thong
+                    tin blog</a>
+                <a class="btn btn-primary" style="text-decoration: none" th:href="@{/edit/{id}(id=${item.getId()})}">Sua
+                    blog</a>
+                <a class="btn btn-primary" style="text-decoration: none" th:href="@{/delete/{id}(id=${item.getId()})}">Xoa
+                    blog</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="text-align: center">
+    <a class="btn btn-primary" th:if="${blogPage.hasPrevious()}"
+       th:href="@{/(page=${blogPage.number - 1})}">Previous</a>
+    <span th:text="${blogPage.number + 1}"></span> | <span th:text="${blogPage.totalPages}"></span>
+    <a class="btn btn-primary" th:if="${blogPage.hasNext()}"
+       th:href="@{/(page=${blogPage.number + 1})}">Next</a>
+
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</html>

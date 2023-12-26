@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Thông tin của Blog <span th:text="${blog.getName()}"></span> <a class="btn btn-primary"
+                                                                    style="text-decoration: none" th:href="@{/}">Tro ve
+    menu</a>
+</h1>
+<table class="tab-container table">
+    <tr>
+        <td>ID</td>
+        <td>Tên của Blog</td>
+        <td>Tóm tắt Blog</td>
+        <td>Nội dung của Blog</td>
+        <td>Ngay dang blog</td>
+        <td>The</td>
+        <td>Anh cua blog</td>
+        <td>Danh muc cua blog</td>
+    </tr>
+    <tr>
+        <td th:text="${blog.getId()}"></td>
+        <td th:text="${blog.getName()}"></td>
+        <td th:text="${blog.getTexts()}"></td>
+        <td th:text="${blog.getAlls()}"></td>
+        <td th:text="${blog.getTimeCreateBlog()}"></td>
+        <td th:src="${blog.getImgs()}"></td>
+        <td th:text="${blog.getCategory().getNames()}"></td>
+    </tr>
+</table>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</html>

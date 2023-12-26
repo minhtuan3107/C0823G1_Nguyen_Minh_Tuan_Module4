@@ -5,43 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4b02ab3-be50-446c-be83-7d36f8b19ddb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/thuchanh/HelloServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/src/main/java/com/example/configuration/AppConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/src/main/java/com/example/configuration/AppInitializer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/src/main/java/com/example/controller/BlogController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/src/main/java/com/example/model/Blog.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/src/main/java/com/example/repository/BlogRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/src/main/java/com/example/repository/IBlogRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/src/main/java/com/example/service/BlogService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/src/main/java/com/example/service/IBlogService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/src/main/webapp/WEB-INF/views/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ungdungblog/src/main/webapp/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +33,8 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/MODULE-4/bai_6/bai_tap/ung_dung_blog"
   }
 }]]></component>
   <component name="RunManager">
@@ -103,7 +68,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703486913377</updated>
-      <workItem from="1703486915426" duration="701000" />
+      <workItem from="1703486915426" duration="705000" />
+      <workItem from="1703553657050" duration="48000" />
     </task>
     <servers />
   </component>
