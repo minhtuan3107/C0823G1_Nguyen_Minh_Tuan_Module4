@@ -6,20 +6,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-import java.util.Set;
-
 @Entity
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String names;
-    @OneToMany(mappedBy = "category")
-    private Set<Blog> blogs;
-
+    private String name;
+    private String gender;
+    private int age;
+    private String address;
+    @ManyToOne
+    @JoinColumn(name = "classRoom_id")
+    private ClassRoom classRoom;
 }

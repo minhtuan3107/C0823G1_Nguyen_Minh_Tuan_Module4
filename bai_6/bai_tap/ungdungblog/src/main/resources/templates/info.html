@@ -19,8 +19,6 @@
         <td>Tóm tắt Blog</td>
         <td>Nội dung của Blog</td>
         <td>Ngay dang blog</td>
-        <td>The</td>
-        <td>Anh cua blog</td>
         <td>Danh muc cua blog</td>
     </tr>
     <tr>
@@ -29,7 +27,6 @@
         <td th:text="${blog.getTexts()}"></td>
         <td th:text="${blog.getAlls()}"></td>
         <td th:text="${blog.getTimeCreateBlog()}"></td>
-        <td th:src="${blog.getImgs()}"></td>
         <td th:text="${blog.getCategory().getNames()}"></td>
     </tr>
 </table>
