@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Thêm Mới</h3>
+<form th:object="${userDTO}" action="/add" method="post">
+    FirstName<br>
+    <input th:field="*{firstName}"><br>
+    <small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></small><br>
+    LastName<br>
+    <input th:field="*{lastName}"><br>
+    <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></small><br>
+    PhoneNumber<br>
+    <input th:field="*{phone}"><br>
+    <small th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></small><br>
+    Age<br>
+    <input type="number" th:field="*{age}"><br>
+    <small th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></small><br>
+    Email
+    <input th:field="*{email}"><br>
+    <small th:errors="*{email}"></small><br>
+    <button>Lưu</button>
+</form>
+</body>
+</html>
