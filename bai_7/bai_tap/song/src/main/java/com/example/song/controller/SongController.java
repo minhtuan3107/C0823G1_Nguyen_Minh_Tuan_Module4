@@ -56,13 +56,14 @@ public class SongController {
 
     @PostMapping("editSong")
     public String edit(@Valid @ModelAttribute SongDTO songDTO, BindingResult bindingResult, Model model) {
+        new SongDTO().validate(songDTO, bindingResult);
         if (bindingResult.hasErrors()) {
             return "edit";
+        } else {
+            Song song = new Song();
+            BeanUtils.copyProperties(songDTO, song);
+            this.songService.save(song);
+            return "redirect:/";
         }
-        Song song = new Song();
-        BeanUtils.copyProperties(songDTO, song);
-        System.out.println(song.toString());
-        this.songService.save(song);
-        return "redirect:/";
     }
 }

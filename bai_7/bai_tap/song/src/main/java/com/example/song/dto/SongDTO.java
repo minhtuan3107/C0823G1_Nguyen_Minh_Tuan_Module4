@@ -1,5 +1,6 @@
 package com.example.song.dto;
 
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.validation.Validator;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SongDTO implements Validator {
+    @Id
     private int id;
     private String nameSong;
     private String authorSong;

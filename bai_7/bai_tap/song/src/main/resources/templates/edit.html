@@ -7,8 +7,8 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
-<h1 style="text-align: center">Sửa nhac</h1>
-<form th:action="@{/editSong}" th:object="${songDTO}" method="post">
+<h1 style="text-align: center">Thêm mới nhac</h1>
+<form th:object="${songDTO}" th:action="@{/editSong}" method="post">
     <table class="table">
         <tr>
             <td>Tên Bài Hát</td>
@@ -33,7 +33,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="Sửa"></td>
+            <td colspan="2"><input type="submit" value="Thêm"></td>
         </tr>
     </table>
 </form>
