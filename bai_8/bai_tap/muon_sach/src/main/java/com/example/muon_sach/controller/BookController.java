@@ -5,17 +5,14 @@ import com.example.muon_sach.model.CodeBook;
 import com.example.muon_sach.service.IBookService;
 import com.example.muon_sach.service.ICodeBookService;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Component
@@ -82,16 +79,26 @@ public class BookController {
     }
 
 
-    private int requestToServer = 0;
-
-    @Pointcut("within(com.example.muon_sach.*)")
-    public void countRequestToServer() {
+    @After("execution(* com.example.muon_sach.service.BookService.*(..))")
+    public void logBookStateChange(JoinPoint joinPoint) {
+        System.out.println("Book state changed: " + joinPoint.getSignature().getName());
+        // Ghi log về thay đổi trạng thái sách ở đây
     }
 
-    @Before("countRequestToServer()")
-    public void beforeCallMethod(JoinPoint joinPoint) {
-        System.out.println(joinPoint.getSignature());
-        this.requestToServer++;
-        System.out.println("Request to server:" + this.requestToServer + " time");
+    @AfterThrowing(pointcut = "execution(* com.example.muon_sach.service.BookService.*(..))", throwing = "ex")
+    public void logBookServiceException(JoinPoint joinPoint, Throwable ex) {
+        System.out.println("Exception in method " + joinPoint.getSignature().getName() + ": " + ex.getMessage());
+        // Ghi log về ngoại lệ xảy ra ở đây
+    }
+
+    @After("execution(* com.example.muon_sach.service.BookService.getList(..))")
+    public void logLibraryVisit(JoinPoint joinPoint) {
+        System.out.println("Library visited: " + joinPoint.getSignature().getName());
+        // Ghi log về việc ghé thăm thư viện ở đây
+    }
+
+    @ExceptionHandler(Exception.class)
+    private String getError() {
+        return "error";
     }
 }
