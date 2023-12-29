@@ -70,6 +70,7 @@ public class BookController {
             Book book = bookService.findById(codeBook.getBook().getBookId());
             book.setQuantity(book.getQuantity() + 2);
             bookService.save(book);
+            iCodeBookService.delete(codeBook.getId());
             return "redirect:/";
         } catch (Exception e) {
             model.addAttribute("mess", 1);
