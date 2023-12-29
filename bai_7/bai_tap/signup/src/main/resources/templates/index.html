@@ -21,7 +21,7 @@
     <small th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></small><br>
     Email
     <input th:field="*{email}"><br>
-    <small th:errors="*{email}"></small><br>
+    <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small><br>
     <button>Lưu</button>
 </form>
 </body>

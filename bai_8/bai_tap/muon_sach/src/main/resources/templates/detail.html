@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/borrow}" th:object="${book}" style="text-align: center">
+    <input type="hidden" th:field="*{bookId}">
+    <input type="hidden" th:field="*{content}">
+    <input type="hidden" th:field="*{introduce}">
+    <input type="hidden" th:field="*{img}">
+    <input type="hidden" th:field="*{quantity}">
+    <input type="hidden" th:field="*{bookName}">
+    <div style="font-size: 50px">
+        <p th:text="${book.getBookName()}"></p>
+        <p th:text="${book.getImg()}"></p>
+        <p th:text="${book.getIntroduce()}"></p>
+        <p th:text="${book.getContent()}"></p>
+        <p th:text="${book.getQuantity()}"></p>
+        <input type="submit" value="Mượn sách">
+    </div>
+</form>
+</body>
+</html>

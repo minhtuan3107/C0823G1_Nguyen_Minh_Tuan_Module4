@@ -4,6 +4,10 @@ import com.example.demo.model.Student;
 import com.example.demo.service.IClassRomService;
 import com.example.demo.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +21,22 @@ public class StudentController {
     @Autowired
     private IClassRomService classRomService;
 
-    @GetMapping()
-    private String home(Model model) {
-        model.addAttribute("listStudent", studentService.getList());
+//    @GetMapping()
+//    private String home(Model model) {
+//        model.addAttribute("listStudent", studentService.getList());
+//        model.addAttribute("classRom", classRomService.getList());
+//        return "/index";
+//    }
+
+    @GetMapping("")
+    private String home(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "") String searchName) {
+        Pageable pageable = PageRequest.of(page, 2, Sort.by("age").ascending());
+        Page<Student> listStudent = studentService.getListBlog(searchName, pageable);
+        model.addAttribute("listStudent", listStudent);
+        model.addAttribute("searchName", searchName);
         model.addAttribute("classRom", classRomService.getList());
-        return "/index";
+        model.addAttribute("students", studentService.getList());
+        return "index";
     }
 
     @GetMapping("search")
@@ -30,13 +45,6 @@ public class StudentController {
         return "/index";
     }
 
-
-
-    @GetMapping("sort")
-    private String sort(Model model) {
-        model.addAttribute("listStudent", studentService.sortStudentsByAge());
-        return "/index";
-    }
 
     @GetMapping("add")
     private String formAdd(Model model) {

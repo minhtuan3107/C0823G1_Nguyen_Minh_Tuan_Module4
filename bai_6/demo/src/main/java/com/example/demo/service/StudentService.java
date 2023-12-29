@@ -1,9 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.model.ClassRoom;
 import com.example.demo.model.Student;
 import com.example.demo.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,8 +39,10 @@ public class StudentService implements IStudentService {
     public List<Student> displayStudentGender(String gender) {
         return studentRepository.findByGender(gender);
     }
+
+
     @Override
-    public List<Student> sortStudentsByAge() {
-        return studentRepository.findAllByOrderByAgeAsc();
+    public Page<Student> getListBlog(String name, Pageable pageable) {
+        return studentRepository.search("%" + name + "%", pageable);
     }
 }

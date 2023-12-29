@@ -7,11 +7,10 @@
     <title>Title</title>
 </head>
 <body>
-<h1 style="text-align: center">Quản lý lớp học <a th:href="@{/classRoom}" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Quản lý hớp học</a>
+<h1 style="text-align: center">Quản lý lớp học <a th:href="@{/classRoom}" class="btn btn-primary" tabindex="-1"
+                                                  role="button" aria-disabled="true">Quản lý hớp học</a>
 </h1>
 <a th:href="@{/add}" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Thêm mới học sinh</a>
-<a th:href="@{/sort}" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Sắp xếp học sinh theo
-    tuổi</a>
 <table class="table tab-container">
     <tr>
         <td>STT</td>
@@ -40,6 +39,14 @@
         </td>
     </tr>
 </table>
+<div style="text-align: center">
+    <a class="btn btn-primary" th:if="${listStudent.hasPrevious()}"
+       th:href="@{/(page=${listStudent.number - 1})}">Previous</a>
+    <span th:text="${listStudent.number + 1}"></span> | <span th:text="${listStudent.totalPages}"></span>
+    <a class="btn btn-primary" th:if="${listStudent.hasNext()}"
+       th:href="@{/(page=${listStudent.number + 1})}">Next</a>
+
+</div>
 <form th:action="@{search}" method="get">
     <div class="mb-3">
         <label class="form-label">Chọn giới tính cần tìm</label>
