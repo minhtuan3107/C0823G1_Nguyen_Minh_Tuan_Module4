@@ -1,8 +1,11 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.StudentDTO;
 import com.example.demo.model.Student;
 import com.example.demo.service.IClassRomService;
 import com.example.demo.service.IStudentService;
+import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,9 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class StudentController {
@@ -48,26 +51,43 @@ public class StudentController {
 
     @GetMapping("add")
     private String formAdd(Model model) {
-        model.addAttribute("student", new Student());
-        model.addAttribute("classRom", classRomService.getList());
+        model.addAttribute("studentDTO", new StudentDTO());
+        model.addAttribute("classRoom", classRomService.getList());
         return "add";
     }
 
     @GetMapping("addStudent")
-    private String addStudent(Student student) {
+    private String addStudent(@Valid @ModelAttribute StudentDTO studentDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+        Student student = new Student();
+        new StudentDTO().validate(studentDTO, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("classRoom", classRomService.getList());
+            return "add";
+        }
+        BeanUtils.copyProperties(studentDTO, student);
         studentService.save(student);
         return "redirect:/";
     }
 
     @GetMapping("edit/{id}")
     private String formEdit(Model model, @PathVariable int id) {
-        model.addAttribute("student", studentService.findMyId(id));
+        Student student = studentService.findMyId(id);
+        StudentDTO studentDTO = new StudentDTO();
+        BeanUtils.copyProperties(student, studentDTO);
+        model.addAttribute("studentDTO", studentDTO);
         model.addAttribute("classRom", classRomService.getList());
         return "edit";
     }
 
     @GetMapping("editStudent")
-    private String editStudent(Student student) {
+    private String editStudent(@Valid @ModelAttribute StudentDTO studentDTO, BindingResult bindingResult, Model model) {
+        new StudentDTO().validate(studentDTO, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("classRom", classRomService.getList());
+            return "edit";
+        }
+        Student student = new Student();
+        BeanUtils.copyProperties(studentDTO, student);
         studentService.save(student);
         return "redirect:/";
     }
@@ -76,5 +96,10 @@ public class StudentController {
     private String formDelete(@PathVariable int id, Model model) {
         model.addAttribute("student", studentService.findMyId(id));
         return "delete";
+    }
+
+    @ExceptionHandler(Exception.class)
+    private String getError() {
+        return "error";
     }
 }

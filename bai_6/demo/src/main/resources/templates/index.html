@@ -22,7 +22,7 @@
         <td>Hành động</td>
     </tr>
     <tr th:each="student,loop : ${listStudent}">
-        <td th:text="${loop.count}"></td>
+        <td th:text="${loop.count + listStudent.size * listStudent.number}"></td>
         <td th:text="${student.getName()}"></td>
         <td th:text="${student.getGender()}"></td>
         <td th:text="${student.getAge()}"></td>
@@ -39,14 +39,39 @@
         </td>
     </tr>
 </table>
-<div style="text-align: center">
-    <a class="btn btn-primary" th:if="${listStudent.hasPrevious()}"
-       th:href="@{/(page=${listStudent.number - 1})}">Previous</a>
-    <span th:text="${listStudent.number + 1}"></span> | <span th:text="${listStudent.totalPages}"></span>
-    <a class="btn btn-primary" th:if="${listStudent.hasNext()}"
-       th:href="@{/(page=${listStudent.number + 1})}">Next</a>
+<!--<div style="text-align: center">-->
+<!--    <a class="btn btn-primary" th:if="${listStudent.hasPrevious()}"-->
+<!--       th:href="@{/(page=${listStudent.number - 1})}">Previous</a>-->
+<!--    <span th:text="${listStudent.number + 1}"></span> | <span th:text="${listStudent.totalPages}"></span>-->
+<!--    <a class="btn btn-primary" th:if="${listStudent.hasNext()}"-->
+<!--       th:href="@{/(page=${listStudent.number + 1})}">Next</a>-->
+<!--</div>-->
 
-</div>
+<nav aria-label="..." th:if="${listStudent.getTotalPages() > 1}">
+    <ul class="pagination pagination-circle">
+        <li class="page-item" th:if="${listStudent.hasPrevious()}">
+            <a class="page-link" th:href="@{/(page=${listStudent.number - 1})}">Previous</a>
+        </li>
+        <div th:each="item, loop : ${#numbers.sequence(1, listStudent.totalPages )}">
+            <div th:if="${listStudent.number + 1 == item}">
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" th:href="@{/(page=${item - 1})}" th:text="${item}"><span
+                            class="visually-hidden">(current)</span></a>
+                </li>
+            </div>
+            <div th:unless="${listStudent.number + 1 == item}">
+                <li class="page-item"><a class="page-link" th:href="@{/(page=${item - 1})}"
+                                         th:text="${item}"></a></li>
+            </div>
+
+        </div>
+        <li class="page-item" th:if="${listStudent.hasNext()}">
+            <a class="page-link" th:href="@{/(page=${listStudent.number + 1})}">Next</a>
+        </li>
+    </ul>
+</nav>
+
+
 <form th:action="@{search}" method="get">
     <div class="mb-3">
         <label class="form-label">Chọn giới tính cần tìm</label>

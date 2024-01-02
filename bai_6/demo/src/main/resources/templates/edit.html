@@ -8,11 +8,12 @@
 </head>
 <body>
 <h1 style="text-align: center">Sửa học sinh</h1>
-<form th:action="@{/editStudent}" th:object="${student}">
+<form th:action="@{/editStudent}" th:object="${studentDTO}">
+    <input th:field="*{id}" th:value="${studentDTO.id}">
     <div class="mb-3">
-        <input type="hidden" th:field="*{id}">
         <label class="form-label">Nhập tên</label>
         <input class="form-control" th:field="*{name}">
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
         <label class="form-label">Chọn giới tính</label>
         <select class="form-select" aria-label="Default select example" th:field="*{gender}">
             <option value="Nam">Nam</option>
@@ -21,9 +22,11 @@
         </select>
         <label class="form-label">Nhập tuổi</label>
         <input type="number" class="form-control" th:field="*{age}">
+        <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
         <label class="form-label">Nhập địa chỉ</label>
         <input type="text" class="form-control" th:field="*{address}">
-        <label class="form-label">Chọn lớp</label>
+        <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+        <label class="form-label">Chọn lớp học</label>
         <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" th:field="*{classRoom}">
             <option th:each="item,status:${classRom}" th:value="${item.getId()}"
                     th:text="${item.getName()}"></option>
