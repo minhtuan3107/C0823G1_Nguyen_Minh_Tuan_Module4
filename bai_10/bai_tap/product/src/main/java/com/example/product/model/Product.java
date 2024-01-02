@@ -26,6 +26,7 @@ public class Product {
     private String description;
     private String image;
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

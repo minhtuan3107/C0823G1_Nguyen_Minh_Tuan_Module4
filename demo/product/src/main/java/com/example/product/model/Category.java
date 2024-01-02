@@ -1,34 +1,33 @@
 package com.example.product.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.Set;
 
 @Entity
 public class Category {
     @Id
-    private int Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String name;
     @OneToMany(mappedBy = "category")
-    private Set<Category> categories;
+    private Set<Product> products;
+
+    public Category(int id, String name, Set<Product> products) {
+        this.id = id;
+        this.name = name;
+        this.products = products;
+    }
 
     public Category() {
     }
 
-    public Category(int id, String name, Set<Category> categories) {
-        Id = id;
-        this.name = name;
-        this.categories = categories;
-    }
-
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -39,11 +38,11 @@ public class Category {
         this.name = name;
     }
 
-    public Set<Category> getCategories() {
-        return categories;
+    public Set<Product> getProducts() {
+        return products;
     }
 
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 }
