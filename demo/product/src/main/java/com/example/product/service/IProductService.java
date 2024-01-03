@@ -17,4 +17,6 @@ public interface IProductService {
     void remove(Product product);
 
     Page<Product> getListProduct(String name, Pageable pageable);
+
+    Page<Product> searchProduct(String categoryName, Pageable pageable);
 }

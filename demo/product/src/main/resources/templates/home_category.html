@@ -32,23 +32,23 @@
 <nav aria-label="..." th:if="${category.getTotalPages() > 1}">
     <ul class="pagination pagination-circle">
         <li class="page-item" th:if="${category.hasPrevious()}">
-            <a class="page-link" th:href="@{category/(page=${category.number - 1})}">Previous</a>
+            <a class="page-link" th:href="@{category(page=${category.number - 1})}">Previous</a>
         </li>
         <div th:each="item, loop : ${#numbers.sequence(1, category.totalPages )}">
             <div th:if="${category.number + 1 == item}">
                 <li class="page-item active" aria-current="page">
-                    <a class="page-link" th:href="@{category/(page=${item - 1})}" th:text="${item}"><span
+                    <a class="page-link" th:href="@{category(page=${item - 1})}" th:text="${item}"><span
                             class="visually-hidden">(current)</span></a>
                 </li>
             </div>
             <div th:unless="${category.number + 1 == item}">
-                <li class="page-item"><a class="page-link" th:href="@{category/(page=${item - 1})}"
+                <li class="page-item"><a class="page-link" th:href="@{category(page=${item - 1})}"
                                          th:text="${item}"></a></li>
             </div>
 
         </div>
         <li class="page-item" th:if="${category.hasNext()}">
-            <a class="page-link" th:href="@{category/(page=${category.number + 1})}">Next</a>
+            <a class="page-link" th:href="@{category(page=${category.number + 1})}">Next</a>
         </li>
     </ul>
 </nav>

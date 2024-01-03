@@ -1,7 +1,6 @@
 package com.example.product.controller;
 
 import com.example.product.model.Cart;
-import com.example.product.model.Category;
 import com.example.product.model.Product;
 import com.example.product.service.ICategoryService;
 import com.example.product.service.IProductService;
@@ -11,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
 
@@ -24,15 +22,14 @@ public class ProductController {
     }
 
     @GetMapping("/shop")
-    public ModelAndView showShop(Cart cart) {
-        ModelAndView modelAndView = new ModelAndView("/shop");
-        modelAndView.addObject("products", productService.getList());
+    public String showShop(Cart cart, Model model) {
+        model.addAttribute("products", productService.getList());
         if (cart.countItemQuantity() != 0) {
-            modelAndView.addObject("itemsInCart", cart.countItemQuantity());
+            model.addAttribute("itemsInCart", cart.countItemQuantity());
         } else {
-            modelAndView.addObject("itemsInCart", 0);
+            model.addAttribute("itemsInCart", 0);
         }
-        return modelAndView;
+        return "index";
     }
 
     @GetMapping("/add/{id}")
@@ -74,8 +71,15 @@ public class ProductController {
 
     @GetMapping()
     private String home(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "") String searchName) {
-        Pageable pageable = PageRequest.of(page, 2);
+        Pageable pageable = PageRequest.of(page, 4);
         model.addAttribute("product", productService.getListProduct(searchName, pageable));
+        return "index";
+    }
+
+    @GetMapping("searchCategory")
+    private String searchCategory(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "") String searchName) {
+        Pageable pageable = PageRequest.of(page, 4);
+        model.addAttribute("product", productService.searchProduct(searchName, pageable));
         return "index";
     }
 
@@ -119,52 +123,4 @@ public class ProductController {
     }
 
     // category
-    @GetMapping("category")
-    private String homeCategory(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "") String searchName) {
-        Pageable pageable = PageRequest.of(page, 5);
-        model.addAttribute("category", categoryService.getListCategory(searchName, pageable));
-        return "home_category";
-    }
-
-    @GetMapping("formAddCategory")
-    private String formAddCategory(Model model) {
-        model.addAttribute("category", new Category());
-        return "add_category";
-    }
-
-    @GetMapping("addCategory")
-    private String addCategory(Category category) {
-        categoryService.save(category);
-        return "redirect:/";
-    }
-
-    @GetMapping("formEditCategory/{id}")
-    private String formEditCategory(@PathVariable int id, Model model) {
-        model.addAttribute("category", categoryService.findById(id));
-        return "edit_category";
-    }
-
-    @GetMapping("formDeleteCategory/{id}")
-    private String formDeleteCategory(@PathVariable int id, Model model) {
-        model.addAttribute("category", categoryService.findById(id));
-        return "delete_category";
-    }
-
-    @GetMapping("deleteCategory")
-    private String deleteCategory(Category category, Model model) {
-        categoryService.delete(category);
-        return "redirect:/";
-    }
-
-//    @GetMapping("category/editCategory")
-//    private String formEdit(@RequestParam("categoryId") int categoryId, Model model) {
-//        model.addAttribute("category", categoryService.findById(categoryId));
-//        return "category/edit_category";
-//    }
-
-    @GetMapping("editCategory")
-    private String editCategory(Category category) {
-        categoryService.save(category);
-        return "redirect:/";
-    }
 }

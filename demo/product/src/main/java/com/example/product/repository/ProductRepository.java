@@ -12,4 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query(value = "select * from product where product.name like :name", nativeQuery = true)
     Page<Product> getListProduct(@Param("name") String name, Pageable pageable);
+
+    @Query(value = "select * from product left join category on product.id = category.id where category.name like :categoryName", nativeQuery = true)
+    Page<Product> searchProduct(@Param("categoryName") String categoryName, Pageable pageable);
 }

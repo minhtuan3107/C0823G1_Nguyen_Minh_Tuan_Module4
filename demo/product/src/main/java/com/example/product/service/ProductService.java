@@ -39,4 +39,9 @@ public class ProductService implements IProductService {
     public Page<Product> getListProduct(String name, Pageable pageable) {
         return productRepository.getListProduct("%" + name + "%", pageable);
     }
+
+    @Override
+    public Page<Product> searchProduct(String categoryName, Pageable pageable) {
+        return productRepository.searchProduct(categoryName, pageable);
+    }
 }
